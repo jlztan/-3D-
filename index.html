@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>机房机柜3D可视化</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Three.js and helpers (legacy non-module for OrbitControls) -->
+    <script src="https://unpkg.com/three@0.124.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.124.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/three@0.124.0/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- CSV parser -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  </head>
+  <body>
+    <div id="toolbar">
+      <div class="legend">
+        <span class="legend-title">设备类型颜色</span>
+        <span class="chip" style="--c:#2e86de">IDS</span>
+        <span class="chip" style="--c:#1abc9c">IPS</span>
+        <span class="chip" style="--c:#e74c3c">防火墙</span>
+        <span class="chip" style="--c:#9b59b6">WAF</span>
+        <span class="chip" style="--c:#f1c40f">VPN网关</span>
+        <span class="chip" style="--c:#34495e">日志审计</span>
+        <span class="chip" style="--c:#e67e22">堡垒机</span>
+        <span class="chip" style="--c:#16a085">网闸</span>
+      </div>
+      <div class="floor-selector" id="floor-selector" aria-label="选择楼层">
+        <button class="floor-btn active" data-floor="1">1F</button>
+        <button class="floor-btn" data-floor="2">2F</button>
+        <button class="floor-btn" data-floor="3">3F</button>
+        <button class="floor-btn" data-floor="4">4F</button>
+        <button class="floor-btn" data-floor="5">5F</button>
+      </div>
+      <div class="column-selector" id="column-selector" aria-label="选择列">
+        <span class="column-title">显示列：</span>
+        <label><input type="checkbox" class="col-chk" data-col="A" checked> A</label>
+        <label><input type="checkbox" class="col-chk" data-col="B" checked> B</label>
+        <label><input type="checkbox" class="col-chk" data-col="C" checked> C</label>
+        <label><input type="checkbox" class="col-chk" data-col="D" checked> D</label>
+        <button id="colSelectAll" class="control-btn">全选</button>
+        <button id="colClearAll" class="control-btn">清空</button>
+      </div>
+      <div class="row-order" id="row-order" aria-label="机柜顺序">
+        <span class="row-order-title">机柜顺序：</span>
+        <label><input type="checkbox" id="reverse-row-order"> 从右到左</label>
+      </div>
+      <div class="help">拖拽旋转，滚轮缩放，右键平移。</div>
+    </div>
+    <div id="canvas-container"></div>
+    <div id="hover-info" class="hidden"></div>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
